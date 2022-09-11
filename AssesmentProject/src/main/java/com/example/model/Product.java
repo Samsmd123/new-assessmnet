@@ -2,29 +2,34 @@ package com.example.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 @Entity
 public class Product {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int productId;
+	private int deptId;
 	private String productName;
 	private double price;
 	private String brand;
-	@ManyToMany
-	Set<Department>departments;
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="dept_id")
+	Set<Department> departments;
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Product(int productId, String productName, double price, String brand) {
+	public Product(int productId, int deptId, String productName, double price, String brand) {
 		super();
 		this.productId = productId;
+		this.deptId = deptId;
 		this.productName = productName;
 		this.price = price;
 		this.brand = brand;
@@ -34,6 +39,12 @@ public class Product {
 	}
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+	public int getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(int deptId) {
+		this.deptId = deptId;
 	}
 	public String getProductName() {
 		return productName;
@@ -61,10 +72,9 @@ public class Product {
 	}
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", price=" + price + ", brand="
-				+ brand + "]";
+		return "Product [productId=" + productId + ", deptId=" + deptId + ", productName=" + productName + ", price="
+				+ price + ", brand=" + brand + "]";
 	}
-
 	
 	
 }

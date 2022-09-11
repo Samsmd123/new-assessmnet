@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.model.Walmart;
 import com.example.respository.IWalmartRepository;
 @Service
-public class WalmartServiceImpl implements IWalmartService{
+public  class WalmartServiceImpl implements IWalmartService{
 
 	IWalmartRepository walmartRepository;
 	@Autowired
@@ -19,6 +19,12 @@ public class WalmartServiceImpl implements IWalmartService{
 	public Walmart addWalmart(Walmart walmart) {
 		return walmartRepository.save(walmart);
 		
+	}
+
+	@Override
+	public void updateWalmart(Walmart walmart) {
+		// TODO Auto-generated method stub
+		walmartRepository.save(walmart);
 	}
 
 	

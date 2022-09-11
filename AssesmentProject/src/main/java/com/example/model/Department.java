@@ -2,8 +2,11 @@ package com.example.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -13,7 +16,8 @@ private int deptId;
 private String deptType;
 private double offers;
 private String giftcards;
-@ManyToMany
+@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+@JoinColumn(name="dept_id")
 Set<Product>products;
 public Department() {
 	super();
